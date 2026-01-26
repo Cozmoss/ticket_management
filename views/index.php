@@ -1,13 +1,12 @@
 <?php
-if (!isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]   ){
- header("Location: login.php");
+session_start();
+if (!isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]) {
+	header("Location: login.php");
 }
 
-
-require_once ("../Controllers/userController.php");
-require_once("../models/User.php");
+require_once "../Controllers/userController.php";
+require_once "../models/User.php";
 $users = UserController::getUsers();
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,11 +18,11 @@ $users = UserController::getUsers();
 </head>
 <body>
 
-    <?php include("navbar.php"); ?>
+    <?php include "navbar.php"; ?>
 
     <div class="container">
         <h1>Liste des Utilisateurs</h1>
-        
+
         <table class="user-table">
             <thead>
                 <tr>
@@ -37,16 +36,16 @@ $users = UserController::getUsers();
             <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><?= htmlspecialchars($user->getLname()); ?></td>
-                        <td><?= htmlspecialchars($user->getFname()); ?></td>
-                        <td><?= htmlspecialchars($user->getEmail()); ?></td>
-                        <td><?= htmlspecialchars($user->getPhone()); ?></td>
-                        <td><span class="badge"><?= htmlspecialchars($user->getRole()); ?></span></td>
+                        <td><?= htmlspecialchars($user->getLname()) ?></td>
+                        <td><?= htmlspecialchars($user->getFname()) ?></td>
+                        <td><?= htmlspecialchars($user->getEmail()) ?></td>
+                        <td><?= htmlspecialchars($user->getPhone()) ?></td>
+                        <td><span class="badge"><?= htmlspecialchars($user->getRole()) ?></span></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    <?php include("footer.php"); ?>
+    <?php include "footer.php"; ?>
 </body>
 </html>

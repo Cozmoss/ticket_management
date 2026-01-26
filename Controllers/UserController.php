@@ -1,63 +1,45 @@
 <?php
-require_once("../DAO/UserDAO.php");
-require_once(__DIR__ . "/../models/User.php");
+require_once "../DAO/UserDAO.php";
+require_once __DIR__ . "/../models/User.php";
 
-class UserController {
+class UserController
+{
+	static function getUsers()
+	{
+		$usersObjet = [];
+		$users = UserDAO::getUsers();
 
-    static function getUsers(){
-        $usersObjet = [];
-        $users = UserDAO::getUsers();
+		foreach ($users as $user) {
+			$usersObjet[] = new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], null, $user["role"], null);
+		}
+		return $usersObjet;
+	}
 
-        foreach($users as $user){
-            $usersObjet[] = new User(
-                null,
-                $user["fname"],
-                $user["lname"],
-                $user["email"],
-                $user["phone_number"],
-                null,
-                $user["role"]
-            );
-        }
-        return $usersObjet;
-    }
+	static function getUser($email)
+	{
+		$user = UserDAO::getUser($email);
+		if ($user) {
+			return new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], $user["password"], $user["role"], null);
+		}
+		return null;
+	}
 
-    static function getUser($email){
-        $user = UserDAO::getUser($email);
-        if($user){
-            return new User(
-                null,
-                $user["fname"],
-                $user["lname"],
-                $user["email"],
-                $user["phone_number"],
-                $user["password"],
-                $user["role"]
-            );
-        }
-        return null;
-    }
+	static function login($email, $pwd)
+	{
+		$user = self::getUser($email);
 
-    static function login($email, $pwd){
-        $user = self::getUser($email);
+		if ($user === null) {
+			$_SESSION["error"] = "user not found";
+			return null;
+		}
 
-        if($user === null){
-            $_SESSION['error'] = "user not found";
-            return null;
-        }
+		$pwd_hashed = $user->getPassword();
 
-        $pwd_hashed = $user->getPassword();
+		if (!password_verify($pwd, $pwd_hashed)) {
+			$_SESSION["error"] = "wrong password";
+			return null;
+		}
 
-        if (!password_verify($pwd, $pwd_hashed)) {
-            $_SESSION['error'] = "wrong password";
-            return null;
-        }
-
-        return $user;
-    }
+		return $user;
+	}
 }
-
-
-$hash = password_hash("123", PASSWORD_BCRYPT);
-echo ($hash);
-
