@@ -1,47 +1,39 @@
 <?php
 
-class MonPDO{
+class MonPDO
+{
+	private const HOST_NAME = "localhost";
 
-    private const HOST_NAME = "localhost";
-    
-    private const DB_NAME = "ticket_management";
+	private const DB_NAME = "ticket_management";
 
-    private const USER_NAME = "root";
+	private const USER_NAME = "root";
 
-    private const PDW = "Mysql-1310";
+	private const PDW = "root";
 
-    private static $monPDOinstance= null;
+	private static $monPDOinstance = null;
 
-    public static function getPDO(){
+	public static function getPDO()
+	{
+		// PATERN SINGLETON
 
-   // PATERN SINGLETON
+		if (is_null(self::$monPDOinstance)) {
+			// creéer la connexion
+			try {
+				$options = [
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				];
+				$url = "mysql:host=" . self::HOST_NAME . "; dbname=" . self::DB_NAME;
 
-   if (is_null(self::$monPDOinstance)){
+				self::$monPDOinstance = new PDO($url, self::USER_NAME, self::PDW);
+			} catch (PDOException $e) {
+				$message = "Erreur de connexion à la db" . $e->getMessage();
+				die($message);
+			}
+		}
 
-   // creéer la connexion
-    try{
+		//renvoyer l'intance de la connexion qui existe déja
 
-        $options =array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        );
-        $url= "mysql:host=".self::HOST_NAME. "; dbname=".self::DB_NAME;
-
-        self::$monPDOinstance= new PDO($url, self::USER_NAME, self::PDW);
-        
-    }
-    catch(PDOException $e){
-        $message= "Erreur de connexion à la db". $e->getMessage();
-        die($message);
-
-    }
-
-   }
-   
-   //renvoyer l'intance de la connexion qui existe déja
-
-    return self::$monPDOinstance;
-    
-    }
-
+		return self::$monPDOinstance;
+	}
 }
