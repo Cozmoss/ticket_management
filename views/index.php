@@ -13,8 +13,11 @@ $users = UserController::getUsers();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/uikit.min.css" />
+    <script src="../public/js/uikit.min.js"></script>
+    <script src="../public/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Gestion des Utilisateurs</title>
+    <title>TicketsFlow</title>
 </head>
 <body>
 

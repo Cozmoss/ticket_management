@@ -38,20 +38,23 @@ insert into priorities (nom) values
 
 -- =========================
 -- USERS
--- (hash bcrypt d’exemple: "password")
+-- (mdp superviseur - id1 : sv)
+-- (mdp teamleader - id2 : tl)
+-- (mdp technicien - id3 : tc)
+-- (mdp utilisateur : mdp)
 -- =========================
 insert into users (fname, lname, email, phone_number, `password`, role_id) values
-('Super', 'Viseur', 'sv@tm.com', '0472555555', '$2y$10$abcdefghijklmnopqrstuv', 1), -- id_user = 1 Superviseur
-('Team', 'Leader', 'tl@tm.com', '0546777777', '$2y$10$abcdefghijklmnopqrstuv', 2), -- id_user = 2 Team Leader
-('Tech', 'Nicien', 'tc@tm.com', '0465888888', '$2y$10$abcdefghijklmnopqrstuv', 3), -- id_user = 3 Technicien
+('Super', 'Viseur', 'sv@tm.com', '0472555555', '$2y$10$SO7PEkirttbi3ZNpoV5MvePeoQ3Cm0r7CGQxUg/FmcUyeJ.QJGqIu', 1), -- id_user = 1 Superviseur
+('Team', 'Leader', 'tl@tm.com', '0546777777', '$2a$12$5zd/aED3DvnhsgS6rRwLweQ.I8EmUf1IqwH5kX7baD8c884gcjoea', 2), -- id_user = 2 Team Leader
+('Tech', 'Nicien', 'tc@tm.com', '0465888888', '$2a$12$MBNr6YFbYWV1R.bbbZjI4.T4QfflHtpkhqNUJ03a.tBfOZ9r4CGr2', 3), -- id_user = 3 Technicien
 
-('Marie', 'Dupont', 'marie.dupont@tm.com', '0472000001', '$2y$10$abcdefghijklmnopqrstuv', 3), -- 4 technicien
-('Jean', 'Martin', 'jean.martin@tm.com', '0472000002', '$2y$10$abcdefghijklmnopqrstuv', 3),  -- 5 technicien
-('Luc', 'Lambert', 'luc.lambert@tm.com', '0472000003', '$2y$10$abcdefghijklmnopqrstuv', 3),  -- 6 technicien
-('Sophie', 'Lemaire', 'sophie.lemaire@tm.com', '0472000004', '$2y$10$abcdefghijklmnopqrstuv', 2), -- 7 team leader
-('Paul', 'Durand', 'paul.durand@tm.com', '0472000005', '$2y$10$abcdefghijklmnopqrstuv', 2), -- 8 team leader
-('Alice', 'Moreau', 'alice.moreau@tm.com', '0472000006', '$2y$10$abcdefghijklmnopqrstuv', 1), -- 9 superviseur (1 suppl.)
-('Nicolas', 'Renard', 'nicolas.renard@tm.com', '0472000007', '$2y$10$abcdefghijklmnopqrstuv', 3); -- 10 technicien
+('Marie', 'Dupont', 'marie.dupont@tm.com', '0472000001', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 3), -- 4 technicien
+('Jean', 'Martin', 'jean.martin@tm.com', '0472000002', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 3),  -- 5 technicien
+('Luc', 'Lambert', 'luc.lambert@tm.com', '0472000003', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 3),  -- 6 technicien
+('Sophie', 'Lemaire', 'sophie.lemaire@tm.com', '0472000004', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 2), -- 7 team leader
+('Paul', 'Durand', 'paul.durand@tm.com', '0472000005', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 2), -- 8 team leader
+('Alice', 'Moreau', 'alice.moreau@tm.com', '0472000006', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 1), -- 9 superviseur (1 suppl.)
+('Nicolas', 'Renard', 'nicolas.renard@tm.com', '0472000007', '$2a$12$T0mWD1oUaglICoemFdVF6euNJsf1e7AdOF0NbqRp0OHWhTcYWCvyC', 3); -- 10 technicien
 
 -- =========================
 -- CLIENTS
