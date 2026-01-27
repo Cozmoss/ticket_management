@@ -49,6 +49,10 @@ class User
 	{
 		return $this->password;
 	}
+	public function getId()
+	{
+		return $this->id;
+	}
 	public function __toString()
 	{
 		return sprintf("User [id=%s, fname=%s, lname=%s, email=%s, phone=%s, role=%s]", $this->id ?? "null", $this->fname, $this->lname, $this->email, $this->phone, $this->role);

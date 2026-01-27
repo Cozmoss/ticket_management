@@ -89,17 +89,17 @@ insert into devices (model, serial_number, brand, type_id, client_id, submission
 -- =========================
 -- TICKETS (10 tickets)
 -- =========================
-insert into tickets (ticket_number, client_id, device_id, status_id, priority_id, created_by) values
-('TCK-2026-0001', 1, 1, 1, 3, 2), -- En attente, Haute, créé par Team Leader (id 2)
-('TCK-2026-0002', 2, 2, 2, 2, 3), -- En cours, Moyenne, créé par Tech (id 3)
-('TCK-2026-0003', 3, 3, 2, 3, 7), -- En cours, Haute, créé par Team Leader (7)
-('TCK-2026-0004', 4, 4, 1, 1, 5), -- En attente, Faible, créé par Tech (5)
-('TCK-2026-0005', 5, 5, 5, 2, 1), -- Résolu, Moyenne, créé par Superviseur (1)
-('TCK-2026-0006', 6, 6, 3, 2, 4), -- Réattribuer, Moyenne, créé par Tech (4)
-('TCK-2026-0007', 7, 7, 2, 3, 8), -- En cours, Haute, créé par Team Leader (8)
-('TCK-2026-0008', 8, 8, 4, 1, 9), -- Annulé, Faible, créé par Superviseur (9)
-('TCK-2026-0009', 9, 9, 1, 2, 6), -- En attente, Moyenne, créé par Tech (6)
-('TCK-2026-0010',10,10,5, 3,10);  -- Résolu, Haute, créé par Tech (10)
+insert into tickets (ticket_number, client_id, device_id, status_id, priority_id, created_by, assigned_to) values
+('TCK-2026-0001', 1, 1, 1, 3, 1, 1),
+('TCK-2026-0002', 2, 2, 2, 2, 1, 1),
+('TCK-2026-0003', 3, 3, 2, 3, 2, 2),
+('TCK-2026-0004', 4, 4, 1, 1, 1, 2),
+('TCK-2026-0005', 5, 5, 5, 2, 1, 2),
+('TCK-2026-0006', 6, 6, 3, 2, 1, 3),
+('TCK-2026-0007', 7, 7, 2, 3, 2, 3),
+('TCK-2026-0008', 8, 8, 4, 1, 2, 3),
+('TCK-2026-0009', 9, 9, 1, 2, 6, 6),
+('TCK-2026-0010',10,10,5, 3,10, 10);
 
 -- =========================
 -- INTERVENTIONS

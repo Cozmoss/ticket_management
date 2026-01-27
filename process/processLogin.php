@@ -1,7 +1,4 @@
 <?php
-ini_set("display_errors", 1);
-ini_set("display_startup_errors", 1);
-error_reporting(E_ALL);
 
 session_start();
 
@@ -47,6 +44,7 @@ $_SESSION["user_lname"] = $user->getLname();
 $_SESSION["user_fname"] = $user->getFname();
 $_SESSION["Email"] = $user->getEmail();
 $_SESSION["user_role"] = $user->getRole();
+$_SESSION["id_user"] = $user->getId();
 $_SESSION["logged_in"] = true;
 
 unset($_SESSION["error"]);

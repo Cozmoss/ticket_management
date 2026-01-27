@@ -1,63 +1,38 @@
-<?php session_start(); ?>
-
-<style>
-.navbar {
-    background-color: #2c3e50;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 50px;
-    height: 60px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
-    font-size: 16px;
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.user-info {
-    color: #ecf0f1;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.logout-btn {
-    background-color: #e74c3c;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-</style>
-
-<nav class="navbar">
-    <div class="nav-links">
-        <a href="index.php">Accueil</a>
-        <a href="tickets.php">Tickets</a>
-        <a href="clients.php">Clients</a>
-        <a href="materiel.php">Matériel</a>
-        <a href="team.php">Team</a>
+<div>
+	<div class="apk-logo uk-margin">
+		<a href="index.php">
+			<img src="../public/img/logo.svg" alt="Logo"> TicketsFlow
+		</a>
+	</div>
+	<div>
+		<ul class="uk-nav">
+			<li class="uk-active">
+				<a href="ticket.php">
+					<span class="uk-margin-small-right"><img src="../public/img/invoices.svg" alt="Tickets" /></span>
+					Tickets
+				</a>
+			</li>
+			<li class="">
+				<a href="profil.php">
+					<span class="uk-margin-small-right"><img src="../public/img/clients.svg" alt="Profil" /></span>
+						Profil
+				</a>
+			</li>
+			<li class="">
+				<a href="contact.php">
+					<span class="uk-margin-small-right"><img src="../public/img/product.svg" alt="Contact"
+					/></span>
+					Utilisateurs
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="uk-flex uk-flex-around uk-flex-center uk-flex-middle">
+	<img src="../public/img/person.svg" alt="">
+	<div class="uk-margin-small-left uk-margin-small-right apk-username">
+		<?= htmlspecialchars($_SESSION["user_fname"]) ?>
+        <?= htmlspecialchars($_SESSION["user_lname"]) ?>
     </div>
-
-    <?php if (!empty($_SESSION["logged_in"])): ?>
-        <div class="nav-actions">
-            <span class="user-info">
-                <?= htmlspecialchars($_SESSION["user_fname"]) ?>
-                <?= htmlspecialchars($_SESSION["user_lname"]) ?>
-                | Rôle : <?= htmlspecialchars($_SESSION["user_role"]) ?>
-            </span>
-
-            <a href="../process/processLogout.php" class="logout-btn">
-                Déconnexion
-            </a>
-        </div>
-    <?php endif; ?>
-</nav>
+	<a href="../process/processLogout.php" class="uk-flex uk-flex-center uk-flex-middle uk-flex-none"><img src="../public/img/logout.svg" alt="logout" class="uk-flex-none"></a>
+</div>

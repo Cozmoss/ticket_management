@@ -19,7 +19,7 @@ class UserController
 	{
 		$user = UserDAO::getUser($email);
 		if ($user) {
-			return new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], $user["password"], $user["role"], null);
+			return new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], $user["password"], $user["role"], $user["id_user"]);
 		}
 		return null;
 	}
