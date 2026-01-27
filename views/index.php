@@ -51,6 +51,7 @@ if (!empty($selectedPriorities)) {
     <title>TicketsFlow</title>
 </head>
 	<body>
+		<?php include "notifications.php"; ?>
 		<div class="uk-grid-collapse" uk-grid>
 			<!-- Left Sidebar -->
 			<div class="uk-width-1-6 uk-padding-small uk-visible@m uk-flex uk-flex-column uk-flex-between apk-left-menu">

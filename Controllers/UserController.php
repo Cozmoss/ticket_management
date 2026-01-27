@@ -10,7 +10,7 @@ class UserController
 		$users = UserDAO::getUsers();
 
 		foreach ($users as $user) {
-			$usersObjet[] = new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], null, $user["role"], null);
+			$usersObjet[] = new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], null, $user["role"], $user["id_user"]);
 		}
 		return $usersObjet;
 	}

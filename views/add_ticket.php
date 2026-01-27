@@ -3,19 +3,19 @@ require_once "../Controllers/PrioritiesController.php";
 require_once "../Controllers/TicketController.php";
 require_once "../Controllers/UserController.php";
 require_once "../Controllers/StatusController.php";
+require_once "../Controllers/ClientController.php";
+require_once "../Controllers/DeviceController.php";
 require_once "../models/Priority.php";
 require_once "../models/User.php";
 require_once "../models/Status.php";
+require_once "../models/Client.php";
+require_once "../models/Device.php";
 
-// Récupération des listes pour les selects
 $priorities = PrioritiesController::getPriorities();
 $users = UserController::getUsers();
 $statuses = StatusController::getStatus();
-
-// Pour le client et le device, il faudrait avoir des DAO/Controllers correspondants.
-// Ici, on simule des listes vides ou à compléter.
-$clients = []; // À remplacer par ClientController::getClients() si dispo
-$devices = []; // À remplacer par DeviceController::getDevices() si dispo
+$clients = ClientController::getClients();
+$devices = DeviceController::getDevices();
 
 // Génération du prochain numéro de ticket au format TCK-YYYY-NNNN
 date_default_timezone_set("Europe/Paris");
@@ -45,7 +45,7 @@ $nextTicketNumber = sprintf("TCK-%s-%04d", $year, $lastNumber + 1);
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="client_id">Client</label>
+                <label class="uk-form-label" for="client_id">Client - <a href="">Ajouter un client</a></label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="client_id" name="client_id" required>
                         <option value="">Sélectionner un client</option>
@@ -58,7 +58,7 @@ $nextTicketNumber = sprintf("TCK-%s-%04d", $year, $lastNumber + 1);
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="device_id">Appareil</label>
+                <label class="uk-form-label" for="device_id">Appareil - <a href="">Ajouter un appareil</a></label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="device_id" name="device_id" required>
                         <option value="">Sélectionner un appareil</option>

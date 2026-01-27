@@ -10,7 +10,7 @@ class ClientController
 		$clients = ClientDAO::getClients();
 
 		foreach ($clients as $client) {
-			$clientsObjet[] = new Client($client["fname"], $client["lname"], $client["email"], $client["phone_number"], null);
+			$clientsObjet[] = new Client($client["id_client"], $client["fname"], $client["lname"], $client["email"], $client["phone_number"]);
 		}
 		return $clientsObjet;
 	}
@@ -19,7 +19,7 @@ class ClientController
 	{
 		$client = ClientDAO::getClient($email);
 		if ($client) {
-			return new Client($client["fname"], $client["lname"], $client["email"], $client["phone_number"], $client["id_client"]);
+			return new Client($client["id_client"], $client["fname"], $client["lname"], $client["email"], $client["phone_number"]);
 		}
 		return null;
 	}

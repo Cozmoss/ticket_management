@@ -7,7 +7,7 @@ class UserDAO
 	public static function getUsers()
 	{
 		$con = MONPDO::getPDO();
-		$requete = "SELECT fname, lname, email, phone_number , `nom` as `role`
+		$requete = "SELECT id_user, fname, lname, email, phone_number , `nom` as `role`
                     FROM users
                     JOIN roles
                     ON role_id=id_role";
@@ -40,10 +40,10 @@ class UserDAO
 
 		$stmt->bindValue(":fname", $user->getFname(), PDO::PARAM_STR);
 		$stmt->bindValue(":lname", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":email", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":phone_number", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":password", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":role_id", $user->getLname(), PDO::PARAM_INT);
+		$stmt->bindValue(":email", $user->getEmail(), PDO::PARAM_STR);
+		$stmt->bindValue(":phone_number", $user->getPhone(), PDO::PARAM_STR);
+		$stmt->bindValue(":password", $user->getPassword(), PDO::PARAM_STR);
+		$stmt->bindValue(":role_id", $user->getRole(), PDO::PARAM_INT);
 
 		$stmt->execute();
 	}

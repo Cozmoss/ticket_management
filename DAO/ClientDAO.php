@@ -7,7 +7,7 @@ class ClientDAO
 	public static function getClients()
 	{
 		$con = MONPDO::getPDO();
-		$requete = "SELECT fname, lname, email, phone_number
+		$requete = "SELECT id_client, fname, lname, email, phone_number
                     FROM clients";
 		$stmt = $con->prepare($requete);
 		$stmt->execute();
@@ -36,8 +36,8 @@ class ClientDAO
 
 		$stmt->bindValue(":fname", $client->getFname(), PDO::PARAM_STR);
 		$stmt->bindValue(":lname", $client->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":email", $client->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":phone_number", $client->getLname(), PDO::PARAM_STR);
+		$stmt->bindValue(":email", $client->getEmail(), PDO::PARAM_STR);
+		$stmt->bindValue(":phone_number", $client->getPhone(), PDO::PARAM_STR);
 
 		$stmt->execute();
 	}
@@ -55,8 +55,8 @@ class ClientDAO
 		$stmt->bindValue(":Id", $client->getId(), PDO::PARAM_INT);
 		$stmt->bindValue(":fname", $client->getFname(), PDO::PARAM_STR);
 		$stmt->bindValue(":lname", $client->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":email", $client->getFname(), PDO::PARAM_STR);
-		$stmt->bindValue(":phone", $client->getLname(), PDO::PARAM_STR);
+		$stmt->bindValue(":email", $client->getEmail(), PDO::PARAM_STR);
+		$stmt->bindValue(":phone", $client->getPhone(), PDO::PARAM_STR);
 
 		$stmt->execute();
 	}
