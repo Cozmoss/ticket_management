@@ -39,7 +39,13 @@ ob_start();
      $roleObj = RoleController::getRoleName($user->getRole());
      echo $roleObj ? $roleObj->getRoleName() : "Inconnu";
      ?></td>
-					<td>Actions</td>
+					<td>
+					    <a href="#"
+					       uk-toggle="target: #modal-update-role"
+					       onclick="openUpdateRoleModal(<?= $user->getId() ?>, <?= $user->getRole() ?>)">
+					       <img src="../public/img/edit.svg" alt="edit">
+					    </a>
+					</td>
 				</tr>
 				<?php endforeach; ?>
 	        </tbody>

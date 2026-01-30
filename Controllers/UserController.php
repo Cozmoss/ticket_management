@@ -29,6 +29,12 @@ class UserController
 		$user = UserDAO::updateUserDAO($user);
 	}
 
+	public static function updateUserRole($userId, $roleId)
+	{
+		require_once __DIR__ . "/../DAO/UserDAO.php";
+		UserDAO::updateUserRole($userId, $roleId);
+	}
+
 	static function login($email, $pwd)
 	{
 		$user = self::getUser($email);

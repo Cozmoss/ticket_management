@@ -28,9 +28,10 @@ $userNamesById = [];
 foreach ($users as $u) {
 	$userNamesById[$u->getId()] = $u->getFname() . " " . $u->getLname();
 }
-
 $user = UserController::getUser($_SESSION["Email"]);
-$priorities = PrioritiesController::getPriorities();
+
+$roles = RoleController::getRoles();
+
 // Si superviseur ou team leader, on récupère tous les tickets, sinon seulement ceux assignés à l'utilisateur
 if ($_SESSION["user_role"] === "Superviseur" || $_SESSION["user_role"] === "Team Leader") {
 	$allTickets = TicketController::getTickets();
@@ -50,6 +51,7 @@ foreach ($allTickets as $ticket) {
 	}
 }
 
+$priorities = PrioritiesController::getPriorities();
 // Gestion des priorités sélectionnées (checkboxes)
 $priorityNames = array_map(function ($priority) {
 	return $priority->getPrioritiesName();

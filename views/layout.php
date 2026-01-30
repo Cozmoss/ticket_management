@@ -52,7 +52,15 @@
 			        }
 			    });
 			});
+			function openUpdateRoleModal(userId, roleId) {
+			    document.getElementById('modal-user-id').value = userId;
+			    var select = document.getElementById('role_client_id');
+			    if (select) {
+			        for (var i = 0; i < select.options.length; i++) {
+			            select.options[i].selected = (select.options[i].value == roleId);
+			        }
+			    }
+			}
 			</script>
-
 	</body>
 </html>

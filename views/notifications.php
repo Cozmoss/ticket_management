@@ -101,3 +101,22 @@
         });
     </script>
 <?php endif; ?>
+<?php if (isset($_GET["success"]) && $_GET["success"] === "role_updated"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Rôle mis à jour !',
+            status: 'success',
+            pos: 'top-center',
+            timeout: 3000
+        });
+    </script>
+<?php elseif (isset($_GET["error"]) && $_GET["error"] === "role_update_failed"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Erreur lors de la mise à jour du rôle',
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 4000
+        });
+    </script>
+<?php endif; ?>

@@ -82,4 +82,14 @@ class UserDAO
 
 		$stmt->execute();
 	}
+
+	public static function updateUserRole($userId, $roleId)
+	{
+		$con = MONPDO::getPDO();
+		$requete = "UPDATE users SET role_id = :role_id WHERE id_user = :id";
+		$stmt = $con->prepare($requete);
+		$stmt->bindValue(":role_id", $roleId, PDO::PARAM_INT);
+		$stmt->bindValue(":id", $userId, PDO::PARAM_INT);
+		$stmt->execute();
+	}
 }

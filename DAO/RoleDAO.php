@@ -3,6 +3,14 @@ require_once "config/MonPDO.php";
 
 class RoleDAO
 {
+	public static function getRoles()
+	{
+		$con = MONPDO::getPDO();
+		$requete = "SELECT id_role, nom FROM roles";
+		$stmt = $con->prepare($requete);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
 	public static function getRoleName($role_id)
 	{
 		$con = MONPDO::getPDO();
