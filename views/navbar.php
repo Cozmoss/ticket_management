@@ -6,20 +6,20 @@
 	</div>
 	<div>
 		<ul class="uk-nav">
-			<li class="uk-active">
-				<a href="ticket.php">
+			<li class="<?= $currentPage === "index.php" ? "uk-active" : "" ?>" >
+				<a href="index.php">
 					<span class="uk-margin-small-right"><img src="../public/img/invoices.svg" alt="Tickets" /></span>
 					Tickets
 				</a>
 			</li>
-			<li class="">
+			<li class="<?= $currentPage === "profil.php" ? "uk-active" : "" ?>">
 				<a href="profil.php">
 					<span class="uk-margin-small-right"><img src="../public/img/clients.svg" alt="Profil" /></span>
 						Profil
 				</a>
 			</li>
-			<li class="">
-				<a href="contact.php">
+			<li class="<?= $currentPage === "user.php" ? "uk-active" : "" ?>">
+				<a href="user.php">
 					<span class="uk-margin-small-right"><img src="../public/img/product.svg" alt="Contact"
 					/></span>
 					Utilisateurs

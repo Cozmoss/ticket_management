@@ -2,11 +2,10 @@
 require_once "bootstrap.php";
 ob_start();
 ?>
-
 <!-- Main Content -->
 <div class="uk-width-expand uk-padding">
 	<div class="uk-flex uk-flex-middle uk-flex-between">
-		<h1>Tickets</h1>
+		<h1>Profil</h1>
 		<button class="uk-button uk-button-primary" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
 	</div>
 	<div uk-grid class="uk-grid uk-child-width-1-1 uk-child-width-1-3@m" uk-height-match="target: div>div>.uk-list">
