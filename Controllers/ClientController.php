@@ -23,4 +23,9 @@ class ClientController
 		}
 		return null;
 	}
+
+	static function addClient($client)
+	{
+		$client = ClientDAO::addClientDAO($client);
+	}
 }

@@ -22,4 +22,8 @@ class DeviceController
 		}
 		return null;
 	}
+	public static function addDevice($device)
+	{
+		return DeviceDAO::addDeviceDAO($device);
+	}
 }

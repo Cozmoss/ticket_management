@@ -79,7 +79,6 @@ if (!empty($selectedPriorities)) {
 				<div class="uk-flex uk-flex-middle uk-flex-between">
 					<h1>Tickets</h1>
 					<button class="uk-button uk-button-primary" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
-					<?php include "add_ticket.php"; ?>
 				</div>
 				<div uk-grid class="uk-grid uk-child-width-1-1 uk-child-width-1-3@m" uk-height-match="target: div>div>.uk-list">
 					<!-- Card DERNIER TICKET RESOLU -->
@@ -253,5 +252,22 @@ if (!empty($selectedPriorities)) {
 				<?php endif; ?>
 			</div>
 		</div>
+<?php include "add_ticket.php"; ?>
+<?php include "add_client.php"; ?>
+<?php include "add_device.php"; ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Quand on ouvre la modal "Ajouter un appareil"
+    UIkit.util.on('#modal-add-device', 'beforeshow', function () {
+        // Récupère le client sélectionné dans la modal ticket
+        var clientSelectTicket = document.getElementById('client_id');
+        var clientSelectDevice = document.getElementById('device_client_id');
+        if (clientSelectTicket && clientSelectDevice) {
+            clientSelectDevice.value = clientSelectTicket.value;
+        }
+    });
+});
+</script>
+
 	</body>
 </html>

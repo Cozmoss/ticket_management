@@ -5,17 +5,20 @@ require_once "../Controllers/UserController.php";
 require_once "../Controllers/StatusController.php";
 require_once "../Controllers/ClientController.php";
 require_once "../Controllers/DeviceController.php";
+require_once "../Controllers/TypeController.php";
 require_once "../models/Priority.php";
 require_once "../models/User.php";
 require_once "../models/Status.php";
 require_once "../models/Client.php";
 require_once "../models/Device.php";
+require_once "../models/Type.php";
 
 $priorities = PrioritiesController::getPriorities();
 $users = UserController::getUsers();
 $statuses = StatusController::getStatus();
 $clients = ClientController::getClients();
 $devices = DeviceController::getDevices();
+$types = TypeController::getTypes();
 
 // Génération du prochain numéro de ticket au format TCK-YYYY-NNNN
 date_default_timezone_set("Europe/Paris");
@@ -45,7 +48,7 @@ $nextTicketNumber = sprintf("TCK-%s-%04d", $year, $lastNumber + 1);
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="client_id">Client - <a href="">Ajouter un client</a></label>
+                <label class="uk-form-label" for="client_id">Client - <a href="#" uk-toggle="target: #modal-add-client">Ajouter un client</a></label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="client_id" name="client_id" required>
                         <option value="">Sélectionner un client</option>
@@ -58,12 +61,12 @@ $nextTicketNumber = sprintf("TCK-%s-%04d", $year, $lastNumber + 1);
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="device_id">Appareil - <a href="">Ajouter un appareil</a></label>
+                <label class="uk-form-label" for="device_id">Appareil - <a href="#" uk-toggle="target: #modal-add-device">Ajouter un appareil</a></label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="device_id" name="device_id" required>
                         <option value="">Sélectionner un appareil</option>
                         <?php foreach ($devices as $device): ?>
-                            <option value="<?= $device->getIdDevice() ?>">
+                            <option value="<?= $device->getIdDevice() ?>" data-client-id="<?= $device->getClientId() ?>">
                                 <?= htmlspecialchars($device->getModel()) ?>
                             </option>
                         <?php endforeach; ?>
@@ -117,3 +120,28 @@ $nextTicketNumber = sprintf("TCK-%s-%04d", $year, $lastNumber + 1);
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const clientSelect = document.getElementById('client_id');
+    const deviceSelect = document.getElementById('device_id');
+    const allDeviceOptions = Array.from(deviceSelect.options);
+
+    function filterDevices() {
+        const clientId = clientSelect.value;
+        // On garde la première option "Sélectionner un appareil"
+        deviceSelect.innerHTML = '';
+        deviceSelect.appendChild(allDeviceOptions[0].cloneNode(true));
+        allDeviceOptions.slice(1).forEach(option => {
+            if (option.getAttribute('data-client-id') === clientId) {
+                deviceSelect.appendChild(option.cloneNode(true));
+            }
+        });
+    }
+
+    clientSelect.addEventListener('change', filterDevices);
+
+    // Optionnel : filtre dès le chargement si un client est pré-sélectionné
+    if (clientSelect.value) filterDevices();
+});
+</script>
