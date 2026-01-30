@@ -18,6 +18,7 @@
 						Profil
 				</a>
 			</li>
+			<?php if ($_SESSION["user_role"] === "Superviseur" || $_SESSION["user_role"] === "Team Leader"): ?>
 			<li class="<?= $currentPage === "user.php" ? "uk-active" : "" ?>">
 				<a href="user.php">
 					<span class="uk-margin-small-right"><img src="../public/img/product.svg" alt="Contact"
@@ -25,6 +26,7 @@
 					Utilisateurs
 				</a>
 			</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </div>

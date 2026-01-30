@@ -7,7 +7,7 @@ class UserDAO
 	public static function getUsers()
 	{
 		$con = MONPDO::getPDO();
-		$requete = "SELECT id_user, fname, lname, email, phone_number , `nom` as `role`
+		$requete = "SELECT id_user, fname, lname, email, phone_number , role_id, `nom` as `role`
                     FROM users
                     JOIN roles
                     ON role_id=id_role";
@@ -19,7 +19,7 @@ class UserDAO
 	public static function getUser($email)
 	{
 		$con = MONPDO::getPDO();
-		$requete = "SELECT id_user, fname, lname, email, phone_number , `password` , `nom` as `role`
+		$requete = "SELECT id_user, fname, lname, email, phone_number , `password` , role_id, `nom` as `role`
                     FROM users
                     JOIN roles
                     ON role_id=id_role
@@ -56,16 +56,18 @@ class UserDAO
             lname=:lname,
             email=:email,
             phone_number =:phone,
-            role_id =:role_id
-             WHERE Id=:Id";
+            role_id =:role_id,
+            password = :password
+             WHERE id_user=:Id";
 		$stmt = $con->prepare($requete);
 
 		$stmt->bindValue(":Id", $user->getId(), PDO::PARAM_INT);
 		$stmt->bindValue(":fname", $user->getFname(), PDO::PARAM_STR);
 		$stmt->bindValue(":lname", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":email", $user->getFname(), PDO::PARAM_STR);
-		$stmt->bindValue(":phone", $user->getLname(), PDO::PARAM_STR);
-		$stmt->bindValue(":role_id", $user->getLname(), PDO::PARAM_INT);
+		$stmt->bindValue(":email", $user->getEmail(), PDO::PARAM_STR);
+		$stmt->bindValue(":phone", $user->getPhone(), PDO::PARAM_STR);
+		$stmt->bindValue(":role_id", $user->getRole(), PDO::PARAM_INT);
+		$stmt->bindValue(":password", $user->getPassword(), PDO::PARAM_STR);
 
 		$stmt->execute();
 	}

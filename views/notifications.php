@@ -73,3 +73,31 @@
         });
     </script>
 <?php endif; ?>
+<?php if (isset($_GET["success"]) && $_GET["success"] === "user_updated"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Utilisateur mis à jour !',
+            status: 'success',
+            pos: 'top-center',
+            timeout: 3000
+        });
+    </script>
+<?php elseif (isset($_GET["error"]) && $_GET["error"] === "user_update_failed"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Erreur lors de la mise à jour de l\'utilisateur.',
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 4000
+        });
+    </script>
+<?php elseif (isset($_GET["error"]) && $_GET["error"] === "user_not_found"): ?>
+    <script>
+        UIkit.notification({
+            message: 'L\'utilisateur n\'existe pas.',
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 4000
+        });
+    </script>
+<?php endif; ?>

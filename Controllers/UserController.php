@@ -10,7 +10,7 @@ class UserController
 		$users = UserDAO::getUsers();
 
 		foreach ($users as $user) {
-			$usersObjet[] = new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], null, $user["role"], $user["id_user"]);
+			$usersObjet[] = new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], null, $user["role_id"], $user["id_user"]);
 		}
 		return $usersObjet;
 	}
@@ -19,9 +19,14 @@ class UserController
 	{
 		$user = UserDAO::getUser($email);
 		if ($user) {
-			return new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], $user["password"], $user["role"], $user["id_user"]);
+			return new User($user["fname"], $user["lname"], $user["email"], $user["phone_number"], $user["password"], $user["role_id"], $user["id_user"]);
 		}
 		return null;
+	}
+
+	static function updateUser($user)
+	{
+		$user = UserDAO::updateUserDAO($user);
 	}
 
 	static function login($email, $pwd)

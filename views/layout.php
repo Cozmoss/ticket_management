@@ -36,22 +36,23 @@
 			<!-- Main Content -->
 			<?= $mainContent ?>
 
-<?php include "add_ticket.php"; ?>
-<?php include "add_client.php"; ?>
-<?php include "add_device.php"; ?>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Quand on ouvre la modal "Ajouter un appareil"
-    UIkit.util.on('#modal-add-device', 'beforeshow', function () {
-        // Récupère le client sélectionné dans la modal ticket
-        var clientSelectTicket = document.getElementById('client_id');
-        var clientSelectDevice = document.getElementById('device_client_id');
-        if (clientSelectTicket && clientSelectDevice) {
-            clientSelectDevice.value = clientSelectTicket.value;
-        }
-    });
-});
-</script>
+			<?php include "add_ticket.php"; ?>
+			<?php include "add_client.php"; ?>
+			<?php include "add_device.php"; ?>
+			<?php include "update_role.php"; ?>
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			    // Quand on ouvre la modal "Ajouter un appareil"
+			    UIkit.util.on('#modal-add-device', 'beforeshow', function () {
+			        // Récupère le client sélectionné dans la modal ticket
+			        var clientSelectTicket = document.getElementById('client_id');
+			        var clientSelectDevice = document.getElementById('device_client_id');
+			        if (clientSelectTicket && clientSelectDevice) {
+			            clientSelectDevice.value = clientSelectTicket.value;
+			        }
+			    });
+			});
+			</script>
 
 	</body>
 </html>

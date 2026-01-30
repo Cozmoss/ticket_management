@@ -128,8 +128,16 @@ ob_start();
 						<td><?= $ticket->getDeviceName() ?></td>
 						<td><?= $ticket->getStatusName() ?></td>
 						<td><?= $ticket->getPriorityName() ?></td>
-						<td><?= $ticket->getCreatedBy() ?></td>
-						<td><?= $ticket->getAssignedTo() ?></td>
+						<td><?php
+      $createdById = $ticket->getCreatedBy();
+      echo $userNamesById[$createdById];
+      ?>
+						</td>
+						<td> <?php
+      $assignedToId = $ticket->getAssignedTo();
+      echo $userNamesById[$assignedToId];
+      ?>
+						</td>
 						<td>Actions</td>
 					</tr>
 					<?php endforeach; ?>
@@ -169,8 +177,16 @@ ob_start();
 						<td><?= $ticket->getDeviceName() ?></td>
 						<td><?= $ticket->getStatusName() ?></td>
 						<td><?= $ticket->getPriorityName() ?></td>
-						<td><?= $ticket->getCreatedBy() ?></td>
-						<td><?= $ticket->getAssignedTo() ?></td>
+						<td><?php
+      $createdById = $ticket->getCreatedBy();
+      echo $userNamesById[$createdById];
+      ?>
+						</td>
+						<td> <?php
+      $assignedToId = $ticket->getAssignedTo();
+      echo $userNamesById[$assignedToId];
+      ?>
+						</td>
 						<td>Actions</td>
 					</tr>
 					<?php endforeach; ?>

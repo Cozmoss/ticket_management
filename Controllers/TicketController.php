@@ -17,8 +17,8 @@ class TicketController
 				$ticket["device_model"],
 				$ticket["status"],
 				$ticket["priority"],
-				trim($ticket["created_by_fname"] . " " . $ticket["created_by_lname"]),
-				trim($ticket["assigned_to_fname"] . " " . $ticket["assigned_to_lname"]),
+				$ticket["created_by"],
+				$ticket["assigned_to"],
 				$ticket["id_ticket"] ?? null,
 			);
 		}
@@ -38,8 +38,8 @@ class TicketController
 				$ticket["device_model"],
 				$ticket["status"],
 				$ticket["priority"],
-				trim($ticket["created_by_fname"] . " " . $ticket["created_by_lname"]),
-				trim($ticket["assigned_to_fname"] . " " . $ticket["assigned_to_lname"]),
+				$ticket["created_by"],
+				$ticket["assigned_to"],
 				$ticket["id_ticket"] ?? null,
 			);
 		}
