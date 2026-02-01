@@ -15,7 +15,8 @@ ob_start();
 			<?php
    // Filtrer les tickets résolus pour l'utilisateur courant
    $ticketsResolus = array_filter($allTickets, function ($ticket) {
-   	return strtolower($ticket->getStatusName()) === "resolu";
+   	$status = $ticket->getStatusName();
+   	return $status && strtolower($status) === "Résolu";
    });
    // Compteur
    $nbResolus = count($ticketsResolus);
@@ -51,7 +52,8 @@ ob_start();
 			<?php
    // Filtrer les tickets avec priorité haute
    $ticketsHaute = array_filter($allTickets, function ($ticket) {
-   	return strtolower($ticket->getPriorityName()) === "haute";
+   	$priority = $ticket->getPriorityName();
+   	return $priority && strtolower($priority) === "haute";
    });
    // Trier du plus récent au plus vieux
    usort($ticketsHaute, function ($a, $b) {
@@ -146,6 +148,8 @@ ob_start();
      $deviceName = $ticket->getDeviceName();
      $createdByName = $userNamesById[$ticket->getCreatedBy()] ?? "Inconnu";
      $interventions = InterventionController::getInterventionsByTicket($ticket->getIdTicket());
+     $priorities = PrioritiesController::getPriorities();
+     $statuses = StatusController::getStatus();
      include "ticket.php";
      ?>
 					<?php endforeach; ?>
@@ -171,22 +175,14 @@ ob_start();
 	        </thead>
 	        <tbody>
 				<?php $ticketsEnAttente = array_filter($allTickets, function ($ticket) {
-    	return strtolower($ticket->getStatusName()) === "en attente";
+    	$status = $ticket->getStatusName();
+    	return $status && strtolower($status) === "en attente";
     }); ?>
 				<?php if (empty($ticketsEnAttente)): ?>
 					<tr>
 						<td colspan="8">Pas de ticket en attente</td>
 					</tr>
-				<?php
-    	// Prépare les variables nécessaires pour la modal
-    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
-    	// Prépare les variables nécessaires pour la modal
-    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
-    	// Prépare les variables nécessaires pour la modal
-    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
-    	// Prépare les variables nécessaires pour la modal
-    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
-    	else: ?>
+				<?php else: ?>
 					<?php foreach ($ticketsEnAttente as $ticket): ?>
 					<tr>
 						<td><?= $ticket->getTicketNumber() ?></td>
@@ -211,6 +207,8 @@ ob_start();
      $deviceName = $ticket->getDeviceName();
      $createdByName = $userNamesById[$ticket->getCreatedBy()] ?? "Inconnu";
      $interventions = InterventionController::getInterventionsByTicket($ticket->getIdTicket());
+     $priorities = PrioritiesController::getPriorities();
+     $statuses = StatusController::getStatus();
      include "ticket.php";
      ?>
 					<?php endforeach; ?>

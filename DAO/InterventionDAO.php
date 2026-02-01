@@ -7,7 +7,7 @@ class InterventionDAO
 	public static function getInterventionsByTicket($ticket_id)
 	{
 		$con = MONPDO::getPDO();
-		$stmt = $con->prepare("SELECT * FROM intervention WHERE ticket_id = :ticket_id");
+		$stmt = $con->prepare("SELECT * FROM intervention WHERE ticket_id = :ticket_id ORDER bY start_at DESC");
 		$stmt->bindValue(":ticket_id", $ticket_id, PDO::PARAM_INT);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

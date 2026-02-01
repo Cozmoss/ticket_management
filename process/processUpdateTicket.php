@@ -1,5 +1,8 @@
 <?php
 session_start();
+ini_set("display_errors", 1);
+ini_set("display_startup_errors", 1);
+error_reporting(E_ALL);
 
 require_once "../Controllers/TicketController.php";
 require_once "../Controllers/InterventionController.php";
@@ -19,19 +22,19 @@ try {
 	$ticket = TicketController::getTicketById($ticket_id);
 
 	if (!$ticket) {
-		header("Location: ../views/ticket.php?error=ticket_not_found");
+		header("Location: ../views/index.php?error=ticket_not_found");
 		exit();
 	}
 
 	// Met à jour les champs modifiables
 	if ($priority_id) {
-		$ticket->priority_id = $priority_id;
+		$ticket->setPriorityId($priority_id);
 	}
 	if ($status_id) {
-		$ticket->status_id = $status_id;
+		$ticket->setStatusId($status_id);
 	}
 	if ($assigned_to) {
-		$ticket->assigned_to = $assigned_to;
+		$ticket->setAssignedTo($assigned_to);
 	}
 
 	// Mets à jour le ticket en base
@@ -42,9 +45,9 @@ try {
 		InterventionController::addIntervention($ticket_id, $intervention_user_id, $intervention_start_at, $intervention_end_at);
 	}
 
-	header("Location: ../views/ticket.php?success=ticket_updated");
+	header("Location: ../views/index.php?success=ticket_updated");
 	exit();
 } catch (Exception $e) {
-	header("Location: ../views/ticket.php?error=ticket_update_failed");
+	header("Location: ../views/index.php?error=ticket_update_failed");
 	exit();
 }

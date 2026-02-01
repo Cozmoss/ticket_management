@@ -25,6 +25,7 @@
             </div>
             <div class="uk-margin">
                 <label class="uk-form-label" for="status_id">Statut</label>
+
                 <select class="uk-select" id="status_id" name="status_id">
                     <?php foreach ($statuses as $status): ?>
                         <option value="<?= $status->getIdStatus() ?>" <?= $status->getIdStatus() == $ticket->getStatusId() ? "selected" : "" ?>>
@@ -50,15 +51,50 @@
             <!-- Liste des interventions -->
             <div class="uk-margin">
                 <label class="uk-form-label">Interventions</label>
-                <ul class="uk-list">
+                <?php $totalSeconds = 0; ?>
+                <ul class="uk-list uk-list-divider">
                     <?php foreach ($interventions as $intervention): ?>
+                        <?php
+                        $start = strtotime($intervention->getStartAt());
+                        $end = strtotime($intervention->getEndAt());
+                        $duration = $start && $end ? $end - $start : 0;
+                        $totalSeconds += $duration;
+                        $hours = floor($duration / 3600);
+                        $minutes = floor(($duration % 3600) / 60);
+                        ?>
                         <li>
-                            <?= htmlspecialchars($userNamesById[$intervention->getUserId()] ?? "Inconnu") ?> :
-                            <?= htmlspecialchars($intervention->getStartAt()) ?> → <?= htmlspecialchars($intervention->getEndAt()) ?>
+                            <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-small">
+                                <div class="uk-flex uk-flex-between uk-flex-middle">
+                                    <div>
+                                        <span class="uk-text-bold"><?= htmlspecialchars($userNamesById[$intervention->getUserId()]) ?></span>
+                                        <span class="uk-label uk-margin-small-left"><?= $hours ?>h <?= $minutes ?>m</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="uk-text-meta"><?= htmlspecialchars($intervention->getStartAt()) ?></span>
+                                    <span class="uk-icon uk-margin-small-left" uk-icon="arrow-right"></span>
+                                    <span class="uk-text-meta"><?= htmlspecialchars($intervention->getEndAt()) ?></span>
+                                </div>
+                            </div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
+                <?php
+                $totalHours = $totalSeconds / 3600;
+                $totalMinutes = floor(($totalSeconds % 3600) / 60);
+                $prix = round($totalHours * 50, 2);
+                ?>
+                <div class="uk-margin-small">
+                    <strong>Temps total :</strong>
+                    <?= floor($totalHours) ?>h <?= $totalMinutes ?>m
+                </div>
+                <div class="uk-margin-small">
+                    <strong>Prix :</strong>
+                    <?= number_format($prix, 2, ",", " ") ?> €
+                </div>
             </div>
+
+
             <!-- Ajout d'une intervention -->
             <div class="uk-margin">
                 <label class="uk-form-label">Ajouter une intervention</label>

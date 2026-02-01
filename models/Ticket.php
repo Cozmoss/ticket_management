@@ -19,51 +19,20 @@ class Ticket
 	private $created_by;
 	private $assigned_to;
 
-	public function __construct(
-		$ticket_number,
-		$client, // id ou nom
-		$device, // id ou nom
-		$status, // id ou nom
-		$priority, // id ou nom
-		$created_by,
-		$assigned_to,
-		$id_ticket = null,
-	) {
+	public function __construct($ticket_number, $client_id, $device_id, $status_id, $priority_id, $created_by, $assigned_to, $id_ticket = null, $status_name = null, $priority_name = null, $client_name = null, $device_name = null)
+	{
 		$this->ticket_number = $ticket_number;
-
-		// Si c'est un entier, on stocke l'id, sinon le nom
-		if (is_numeric($client)) {
-			$this->client_id = $client;
-			$this->client_name = null;
-		} else {
-			$this->client_name = $client;
-			$this->client_id = null;
-		}
-		if (is_numeric($device)) {
-			$this->device_id = $device;
-			$this->device_name = null;
-		} else {
-			$this->device_name = $device;
-			$this->device_id = null;
-		}
-		if (is_numeric($status)) {
-			$this->status_id = $status;
-			$this->status_name = null;
-		} else {
-			$this->status_name = $status;
-			$this->status_id = null;
-		}
-		if (is_numeric($priority)) {
-			$this->priority_id = $priority;
-			$this->priority_name = null;
-		} else {
-			$this->priority_name = $priority;
-			$this->priority_id = null;
-		}
-
+		$this->client_id = $client_id;
+		$this->device_id = $device_id;
+		$this->status_id = $status_id;
+		$this->priority_id = $priority_id;
 		$this->created_by = $created_by;
 		$this->assigned_to = $assigned_to;
 		$this->id_ticket = $id_ticket;
+		$this->status_name = $status_name;
+		$this->priority_name = $priority_name;
+		$this->client_name = $client_name;
+		$this->device_name = $device_name;
 	}
 
 	// Getters pour affichage
@@ -118,9 +87,17 @@ class Ticket
 		return $this->priority_id;
 	}
 
-	// Setters (optionnel)
+	// Setters
 	public function setAssignedTo($assigned_to)
 	{
 		$this->assigned_to = $assigned_to;
+	}
+	public function setPriorityId($priority_id)
+	{
+		$this->priority_id = $priority_id;
+	}
+	public function setStatusId($status_id)
+	{
+		$this->status_id = $status_id;
 	}
 }

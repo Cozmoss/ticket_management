@@ -23,6 +23,8 @@ require_once "../Controllers/RoleController.php";
 require_once "../models/Role.php";
 require_once "../Controllers/InterventionController.php";
 require_once "../models/Intervention.php";
+require_once "../Controllers/StatusController.php";
+require_once "../models/Status.php";
 
 $users = UserController::getUsers();
 // Tableau associatif id utilisateur => nom complet

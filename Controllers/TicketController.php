@@ -13,13 +13,17 @@ class TicketController
 		foreach ($tickets as $ticket) {
 			$ticketsObjet[] = new Ticket(
 				$ticket["ticket_number"],
-				trim($ticket["client_fname"] . " " . $ticket["client_lname"]),
-				$ticket["device_model"],
-				$ticket["status"],
-				$ticket["priority"],
+				$ticket["client_id"],
+				$ticket["device_id"],
+				$ticket["status_id"],
+				$ticket["priority_id"],
 				$ticket["created_by"],
 				$ticket["assigned_to"],
 				$ticket["id_ticket"] ?? null,
+				$ticket["status"],
+				$ticket["priority"],
+				$ticket["client_fname"] . " " . $ticket["client_lname"],
+				$ticket["device_model"],
 			);
 		}
 		return $ticketsObjet;
@@ -34,13 +38,17 @@ class TicketController
 		foreach ($tickets as $ticket) {
 			$ticketsObjet[] = new Ticket(
 				$ticket["ticket_number"],
-				trim($ticket["client_fname"] . " " . $ticket["client_lname"]),
-				$ticket["device_model"],
-				$ticket["status"],
-				$ticket["priority"],
+				$ticket["client_id"],
+				$ticket["device_id"],
+				$ticket["status_id"],
+				$ticket["priority_id"],
 				$ticket["created_by"],
 				$ticket["assigned_to"],
 				$ticket["id_ticket"] ?? null,
+				$ticket["status"],
+				$ticket["priority"],
+				$ticket["client_fname"] . " " . $ticket["client_lname"],
+				$ticket["device_model"],
 			);
 		}
 		return $ticketsObjet;
@@ -71,6 +79,6 @@ class TicketController
 		if (!$data) {
 			return null;
 		}
-		return new Ticket($data["ticket_number"], trim($data["client_fname"] . " " . $data["client_lname"]), $data["device_model"], $data["status"], $data["priority"], $data["created_by"], $data["assigned_to"], $data["id_ticket"] ?? null);
+		return new Ticket($data["ticket_number"], $data["client_id"], $data["device_id"], $data["status_id"], $data["priority_id"], $data["created_by"], $data["assigned_to"], $data["id_ticket"] ?? null, $data["status"], $data["priority"]);
 	}
 }
