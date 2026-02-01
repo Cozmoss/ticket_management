@@ -28,7 +28,7 @@ ob_start();
    ?>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
 				<div class="uk-flex uk-flex-between uk-flex-middle">
-					<h3 class="uk-card-title">DERNIER TICKET RESOLU</h3>
+					<h3 class="uk-card-title uk-margin-remove">DERNIER TICKET RESOLU</h3>
 					<span class="uk-label"><?= $nbResolus ?>/15</span>
 				</div>
 				<ul class="uk-list uk-list-divider uk-margin-small-top">
@@ -122,6 +122,7 @@ ob_start();
 					</tr>
 				<?php else: ?>
 					<?php foreach ($tickets as $ticket): ?>
+
 					<tr>
 						<td><?= $ticket->getTicketNumber() ?></td>
 						<td><?= $ticket->getClientName() ?></td>
@@ -138,8 +139,15 @@ ob_start();
       echo $userNamesById[$assignedToId];
       ?>
 						</td>
-						<td>Actions</td>
+						<td><a href="#" uk-toggle="target: #modal-ticket-<?= $ticket->getIdTicket() ?>"><img src="../public/img/edit.svg" alt="edit"></a></td>
 					</tr>
+					<?php
+     $clientName = $ticket->getClientName();
+     $deviceName = $ticket->getDeviceName();
+     $createdByName = $userNamesById[$ticket->getCreatedBy()] ?? "Inconnu";
+     $interventions = InterventionController::getInterventionsByTicket($ticket->getIdTicket());
+     include "ticket.php";
+     ?>
 					<?php endforeach; ?>
 				<?php endif; ?>
 	        </tbody>
@@ -169,7 +177,16 @@ ob_start();
 					<tr>
 						<td colspan="8">Pas de ticket en attente</td>
 					</tr>
-				<?php else: ?>
+				<?php
+    	// Prépare les variables nécessaires pour la modal
+    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
+    	// Prépare les variables nécessaires pour la modal
+    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
+    	// Prépare les variables nécessaires pour la modal
+    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
+    	// Prépare les variables nécessaires pour la modal
+    	// etc. (prépare $priorities, $statuses, $users, $userNamesById)
+    	else: ?>
 					<?php foreach ($ticketsEnAttente as $ticket): ?>
 					<tr>
 						<td><?= $ticket->getTicketNumber() ?></td>
@@ -187,8 +204,15 @@ ob_start();
       echo $userNamesById[$assignedToId];
       ?>
 						</td>
-						<td>Actions</td>
+						<td><a href="#" uk-toggle="target: #modal-ticket-<?= $ticket->getIdTicket() ?>"><img src="../public/img/edit.svg" alt="edit"></a></td>
 					</tr>
+					<?php
+     $clientName = $ticket->getClientName();
+     $deviceName = $ticket->getDeviceName();
+     $createdByName = $userNamesById[$ticket->getCreatedBy()] ?? "Inconnu";
+     $interventions = InterventionController::getInterventionsByTicket($ticket->getIdTicket());
+     include "ticket.php";
+     ?>
 					<?php endforeach; ?>
 				<?php endif; ?>
 	        </tbody>

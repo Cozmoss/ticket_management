@@ -120,3 +120,31 @@
         });
     </script>
 <?php endif; ?>
+<?php if (isset($_GET["success"]) && $_GET["success"] === "ticket_updated"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Ticket mis à jour !',
+            status: 'success',
+            pos: 'top-center',
+            timeout: 3000
+        });
+    </script>
+<?php elseif (isset($_GET["error"]) && $_GET["error"] === "ticket_update_failed"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Erreur lors de la mise à jour du ticket',
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 4000
+        });
+    </script>
+<?php elseif (isset($_GET["error"]) && $_GET["error"] === "ticket_not_found"): ?>
+    <script>
+        UIkit.notification({
+            message: 'Ticket non trouvé !',
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 4000
+        });
+    </script>
+<?php endif; ?>

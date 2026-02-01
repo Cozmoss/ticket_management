@@ -63,4 +63,14 @@ class TicketController
 	{
 		return TicketDAO::deleteTicketDAO($id_ticket);
 	}
+
+	// Récupère un ticket par son id et retourne un objet Ticket
+	public static function getTicketById($id_ticket)
+	{
+		$data = TicketDAO::getTicketById($id_ticket);
+		if (!$data) {
+			return null;
+		}
+		return new Ticket($data["ticket_number"], trim($data["client_fname"] . " " . $data["client_lname"]), $data["device_model"], $data["status"], $data["priority"], $data["created_by"], $data["assigned_to"], $data["id_ticket"] ?? null);
+	}
 }

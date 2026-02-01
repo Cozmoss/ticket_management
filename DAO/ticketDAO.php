@@ -128,4 +128,39 @@ class TicketDAO
 
 		$stmt->execute();
 	}
+
+	public static function getTicketById($id_ticket)
+	{
+		$con = MONPDO::getPDO();
+		$requete = "SELECT
+			t.id_ticket,
+			t.ticket_number,
+			t.client_id,
+			t.device_id,
+			t.status_id,
+			t.priority_id,
+			t.created_by,
+			t.assigned_to,
+			c.fname AS client_fname,
+			c.lname AS client_lname,
+			d.model AS device_model,
+			s.nom AS status,
+			p.nom AS priority,
+			u.fname AS created_by_fname,
+			u.lname AS created_by_lname,
+			ua.fname AS assigned_to_fname,
+			ua.lname AS assigned_to_lname
+		FROM tickets t
+			LEFT JOIN clients c ON t.client_id = c.id_client
+			LEFT JOIN devices d ON t.device_id = d.id_device
+			LEFT JOIN status s ON t.status_id = s.id_status
+			LEFT JOIN priorities p ON t.priority_id = p.id_priority
+			LEFT JOIN users u ON t.created_by = u.id_user
+			LEFT JOIN users ua ON t.assigned_to = ua.id_user
+		WHERE t.id_ticket = :id_ticket";
+		$stmt = $con->prepare($requete);
+		$stmt->bindValue(":id_ticket", $id_ticket, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
 }
