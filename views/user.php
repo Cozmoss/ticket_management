@@ -14,7 +14,7 @@ ob_start();
 	</div>
 
 	<div class="uk-overflow-auto">
-	    <table class="uk-table uk-table-small uk-table-divider">
+	    <table class="uk-table uk-table-small uk-table-divider" style="max-height:1200px;">
 	        <thead>
 	            <tr>
 	                <th>#</th>

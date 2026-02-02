@@ -37,7 +37,7 @@ $user = UserController::getUser($_SESSION["Email"]);
 $roles = RoleController::getRoles();
 
 // Si superviseur ou team leader, on récupère tous les tickets, sinon seulement ceux assignés à l'utilisateur
-if ($_SESSION["user_role"] === "Superviseur" || $_SESSION["user_role"] === "Team Leader") {
+if ($_SESSION["user_role"] === 1 || $_SESSION["user_role"] === 2) {
 	$allTickets = TicketController::getTickets();
 } else {
 	$allTickets = TicketController::getTicketsByAssigned($_SESSION["id_user"]);

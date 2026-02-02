@@ -1,0 +1,168 @@
+.uk-button {
+	border-radius: 6px;
+}
+
+.uk-card {
+	min-height: 320px;
+	border-radius: 6px;
+	.uk-card-title {
+		font-size: 14px;
+		font-weight: 700;
+	}
+	.resolu {
+		font-size: 12px;
+		color: lightslategray;
+	}
+}
+
+.uk-modal-body {
+	border-radius: 6px;
+}
+
+.uk-input,
+.uk-select {
+	border-radius: 6px;
+}
+
+.uk-form-label {
+	color: gray;
+}
+
+.filtres {
+	display: inline;
+	width: 100%;
+	cursor: pointer;
+	background: #f5f5f5;
+	border-radius: 6px;
+	padding: 6px 8px;
+	text-align: center;
+	font-weight: 500;
+	transition:
+		background 0.2s,
+		color 0.2s;
+	position: relative;
+	margin-top: 2px;
+	border: 1px solid #ddd;
+	top: 5px;
+}
+
+.filtres input[type="checkbox"] {
+	/* Cache la checkbox native */
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	cursor: pointer;
+	z-index: 2;
+}
+
+/* Effet bouton activé */
+.filtres:has(input[type="checkbox"]:checked) {
+	background: #1e87f0;
+	color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(30, 135, 240, 0.08);
+}
+
+.badge {
+	text-transform: uppercase;
+	font-size: 14px;
+	padding: 6px 8px;
+	border-radius: 6px;
+}
+.en-cours {
+	color: white;
+	background: #008dfb;
+}
+.en-attente {
+	color: white;
+	background: gray;
+}
+.résolu {
+	color: white;
+	background: #39b871;
+}
+.annulé {
+	color: white;
+	background: black;
+}
+.réattribuer {
+	color: white;
+	background: orange;
+}
+
+.uk-table th {
+	text-transform: uppercase;
+	font-size: 12px;
+	color: black;
+}
+
+.interventions {
+	max-height: 250px;
+	overflow: auto;
+}
+
+.apk-left-menu {
+	position: sticky;
+	height: 100vh;
+	top: 0;
+	background-color: #072684;
+	color: white;
+	.apk-logo {
+		img {
+			width: 40px;
+			height: 40px;
+			border-radius: 4px;
+			margin-right: 1ch;
+			background-color: white;
+			padding: 2px;
+		}
+		padding-left: 8px;
+		font-weight: bold;
+		font-size: 13px;
+		a {
+			text-decoration: none;
+			color: white;
+			&:hover {
+				color: #d3d3d3;
+			}
+		}
+	}
+	.uk-nav {
+		a {
+			color: white;
+			font-weight: 500;
+			font-size: 14px;
+			padding: 8px;
+			&:hover {
+				color: #d3d3d3;
+			}
+		}
+		.uk-active {
+			background-color: #0056b3;
+			border-radius: 6px;
+		}
+	}
+	.apk-logout {
+		background-color: #001ce2;
+		border-radius: 6px;
+		width: 40px;
+		height: 40px;
+		&:hover {
+			background-color: #0010c8;
+		}
+	}
+}
+
+.uk-offcanvas-bar {
+	padding: 0;
+}
+
+.apk-username {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

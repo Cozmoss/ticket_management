@@ -55,5 +55,4 @@ ob_start();
 $mainContent = ob_get_clean();
 include "layout.php";
 
-
 ?>

@@ -31,7 +31,7 @@
 	</div>
 </div>
 <div class="uk-flex uk-flex-around uk-flex-center uk-flex-middle">
-	<img src="../public/img/person.svg" alt="">
+	<a href="/profil.php" class=""><img src="../public/img/person.svg" alt=""></a>
 	<div class="uk-margin-small-left uk-margin-small-right apk-username">
 		<?= htmlspecialchars($_SESSION["user_fname"]) ?>
         <?= htmlspecialchars($_SESSION["user_lname"]) ?>

@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="../public/css/uikit.min.css" />
     <script src="../public/js/uikit.min.js"></script>
     <script src="../public/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <?php if (isset($statusLabels, $statusValues, $statusColors)): ?>
+    <script>
+    window.statusChartData = {
+        labels: <?= json_encode($statusLabels) ?>,
+        values: <?= json_encode($statusValues) ?>,
+        colors: <?= json_encode(array_slice($statusColors, 0, count($statusLabels))) ?>
+    };
+    </script>
+    <?php endif; ?>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../public/js/chart.js"></script>
+    <link rel="stylesheet" href="../public/css/app.css">
     <title>TicketsFlow</title>
 </head>
 	<body>

@@ -7,16 +7,16 @@ ob_start();
 <div class="uk-width-expand uk-padding">
 	<div class="uk-flex uk-flex-middle uk-flex-between">
 		<h1>Tickets</h1>
-		<button class="uk-button uk-button-primary" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
+		<button class="uk-button uk-button-primary uk-flex uk-flex-middle" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
 	</div>
-	<div uk-grid class="uk-grid uk-child-width-1-1 uk-child-width-1-3@m" uk-height-match="target: div>div>.uk-list">
+	<div uk-grid class="uk-grid uk-child-width-1-1 uk-child-width-1-3@m">
 		<!-- Card DERNIER TICKET RESOLU -->
 		<div>
 			<?php
    // Filtrer les tickets résolus pour l'utilisateur courant
    $ticketsResolus = array_filter($allTickets, function ($ticket) {
    	$status = $ticket->getStatusName();
-   	return $status && strtolower($status) === "Résolu";
+   	return $status && strtolower($status) === "résolu";
    });
    // Compteur
    $nbResolus = count($ticketsResolus);
@@ -25,12 +25,12 @@ ob_start();
    	return $b->getIdTicket() <=> $a->getIdTicket();
    });
    // Les 4 derniers tickets résolus
-   $lastResolus = array_slice($ticketsResolus, 0, 4);
+   $lastResolus = array_slice($ticketsResolus, 0, 5);
    ?>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
 				<div class="uk-flex uk-flex-between uk-flex-middle">
 					<h3 class="uk-card-title uk-margin-remove">DERNIER TICKET RESOLU</h3>
-					<span class="uk-label"><?= $nbResolus ?>/15</span>
+					<span class="resolu"><?= $nbResolus ?>/15</span>
 				</div>
 				<ul class="uk-list uk-list-divider uk-margin-small-top">
 					<?php if (empty($lastResolus)): ?>
@@ -38,8 +38,7 @@ ob_start();
 					<?php else: ?>
 						<?php foreach ($lastResolus as $ticket): ?>
 							<li>
-								<span class="uk-text-bold"><?= $ticket->getStatusName() ?></span>
-								-
+								<span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span>
 								<span><?= $ticket->getClientName() ?></span>
 							</li>
 						<?php endforeach; ?>
@@ -60,7 +59,7 @@ ob_start();
    	return $b->getIdTicket() <=> $a->getIdTicket();
    });
    // Les 4 derniers tickets haute priorité
-   $lastHaute = array_slice($ticketsHaute, 0, 4);
+   $lastHaute = array_slice($ticketsHaute, 0, 5);
    ?>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
 				<h3 class="uk-card-title">TICKETS PRIORITAIRE</h3>
@@ -70,8 +69,7 @@ ob_start();
 					<?php else: ?>
 						<?php foreach ($lastHaute as $ticket): ?>
 							<li>
-								<span class="uk-text-bold"><?= $ticket->getPriorityName() ?></span>
-								-
+								<span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span>
 								<span><?= $ticket->getClientName() ?></span>
 							</li>
 						<?php endforeach; ?>
@@ -81,10 +79,27 @@ ob_start();
 		</div>
 		<div>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-				<h3 class="uk-card-title">CHART</h3>
-				<ul class="uk-list uk-list-divider uk-margin-small-top">
-
-				</ul>
+				<?php
+    // Compte le nombre de tickets par status
+    $statusCounts = [];
+    foreach ($allTickets as $ticket) {
+    	$status = $ticket->getStatusName();
+    	if ($status) {
+    		if (!isset($statusCounts[$status])) {
+    			$statusCounts[$status] = 0;
+    		}
+    		$statusCounts[$status]++;
+    	}
+    }
+    // Prépare les labels et les valeurs pour ChartJS
+    $statusLabels = array_keys($statusCounts);
+    $statusValues = array_values($statusCounts);
+    // Couleurs pour chaque status (ajuste selon tes besoins)
+    $statusColors = ["#1e87f0", "#32d296", "#faa05a", "#f0506e", "#222", "#999"];
+    ?>
+		        <h3 class="uk-card-title uk-margin-remove">VUE D'ENSEMBLE</h3>
+		        <canvas id="statusChart" width="250" height="50" style="display:block;margin:-40px auto;"></canvas>
+		        <div id="statusLegend"></div>
 			</div>
 		</div>
 	</div>
@@ -93,7 +108,7 @@ ob_start();
 	<form method="get" id="priorityFilterForm" style="margin-bottom: 20px;">
 		<label>Filtrer par priorité :</label><br>
 		<?php foreach ($priorityNames as $name): ?>
-			<label style="margin-right: 15px;">
+			<label class="filtres" style="margin-right: 15px;">
 				<input type="checkbox" name="priority[]" value="<?= htmlspecialchars($name) ?>"
 					<?= in_array($name, $selectedPriorities) ? "checked" : "" ?>
 					onchange="document.getElementById('priorityFilterForm').submit();"
@@ -104,10 +119,10 @@ ob_start();
 	</form>
 
 	<div class="uk-overflow-auto">
-	    <table class="uk-table uk-table-small uk-table-divider">
+	    <table class="uk-table uk-table-small uk-table-divider" style="max-height:1120px;">
 	        <thead>
 	            <tr>
-	                <th>#</th>
+	                <th>Ticket</th>
 	                <th>Nom du client</th>
 	                <th>Device</th>
 	                <th>Status</th>
@@ -129,7 +144,7 @@ ob_start();
 						<td><?= $ticket->getTicketNumber() ?></td>
 						<td><?= $ticket->getClientName() ?></td>
 						<td><?= $ticket->getDeviceName() ?></td>
-						<td><?= $ticket->getStatusName() ?></td>
+						<td><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
 						<td><?= $ticket->getPriorityName() ?></td>
 						<td><?php
       $createdById = $ticket->getCreatedBy();
@@ -146,7 +161,7 @@ ob_start();
 					<?php
      $clientName = $ticket->getClientName();
      $deviceName = $ticket->getDeviceName();
-     $createdByName = $userNamesById[$ticket->getCreatedBy()] ?? "Inconnu";
+     $createdByName = $userNamesById[$ticket->getCreatedBy()];
      $interventions = InterventionController::getInterventionsByTicket($ticket->getIdTicket());
      $priorities = PrioritiesController::getPriorities();
      $statuses = StatusController::getStatus();
@@ -157,13 +172,13 @@ ob_start();
 	        </tbody>
 	    </table>
 	</div>
-	<?php if ($_SESSION["user_role"] === "Superviseur" || $_SESSION["user_role"] === "Team Leader"): ?>
+	<?php if ($_SESSION["user_role"] === 1 || $_SESSION["user_role"] === 2): ?>
 	<h2>Ticket en attente</h2>
 	<div class="uk-overflow-auto">
-	    <table class="uk-table uk-table-small uk-table-divider">
+	    <table class="uk-table uk-table-small uk-table-divider" style="max-height:1120px;">
 	        <thead>
 	            <tr>
-	                <th>#</th>
+	                <th>Ticket</th>
 	                <th>Nom du client</th>
 	                <th>Device</th>
 	                <th>Status</th>
@@ -188,7 +203,7 @@ ob_start();
 						<td><?= $ticket->getTicketNumber() ?></td>
 						<td><?= $ticket->getClientName() ?></td>
 						<td><?= $ticket->getDeviceName() ?></td>
-						<td><?= $ticket->getStatusName() ?></td>
+						<td><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
 						<td><?= $ticket->getPriorityName() ?></td>
 						<td><?php
       $createdById = $ticket->getCreatedBy();
