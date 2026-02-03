@@ -37,7 +37,6 @@ canvas {
 	z-index: 2;
 }
 
-/* Effet bouton activé */
 .filtres:has(input[type="checkbox"]:checked) {
 	background: #1e87f0;
 	color: #fff;
