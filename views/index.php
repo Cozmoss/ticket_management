@@ -8,7 +8,9 @@ ob_start();
 <div>
 	<div class="uk-flex uk-flex-middle uk-flex-between">
 		<h1>Tickets</h1>
+		<?php if ($_SESSION["user_role"] === 1 || $_SESSION["user_role"] === 2): ?>
 		<button class="uk-button uk-button-primary uk-flex uk-flex-middle" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
+		<?php endif; ?>
 	</div>
 	<div uk-grid class="uk-grid uk-child-width-1-1 uk-child-width-1-3@m">
 		<!-- Card DERNIER TICKET RESOLU -->

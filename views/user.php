@@ -1,7 +1,7 @@
 <?php
 require_once "bootstrap.php";
 //Vérification du role
-if ($_SESSION["user_role"] !== 1 && $_SESSION["user_role"] !== 2) {
+if ($_SESSION["user_role"] !== 1) {
 	header("Location: index.php");
 	exit();
 }
@@ -29,7 +29,7 @@ ob_start();
 				<tr>
 					<td> <?php
      $userId = $user->getId();
-     if (isset($ticketsResolusParUser[$userId]) && $ticketsResolusParUser[$userId] >= 0 && $user->getRole() !== 1) {
+     if (isset($ticketsResolusParUser[$userId]) && $ticketsResolusParUser[$userId] >= 15 && $user->getRole() !== 1) {
      	echo '<span uk-icon="icon: arrow-up"></span>';
      }
      ?></td>

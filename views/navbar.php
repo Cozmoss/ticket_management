@@ -18,7 +18,7 @@
 						Profil
 				</a>
 			</li>
-			<?php if ($_SESSION["user_role"] === 1 || $_SESSION["user_role"] === 2): ?>
+			<?php if ($_SESSION["user_role"] === 1): ?>
 			<li class="<?= $currentPage === "user.php" ? "uk-active" : "" ?>">
 				<a href="user.php">
 					<span class="uk-margin-small-right"><img src="../public/img/product.svg" alt="Contact"
