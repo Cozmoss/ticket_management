@@ -3,7 +3,7 @@ session_start();
 require_once "../Controllers/UserController.php";
 
 // Vérification des droits (optionnel mais recommandé)
-if ($_SESSION["user_role"] !== "Superviseur" && $_SESSION["user_role"] !== "Team Leader") {
+if ($_SESSION["user_role"] !== 1 && $_SESSION["user_role"] !== 2) {
 	header("Location: ../views/user.php?error=unauthorized");
 	exit();
 }

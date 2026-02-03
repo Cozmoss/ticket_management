@@ -4,7 +4,8 @@ ob_start();
 ?>
 
 <!-- Main Content -->
-<div class="uk-width-expand uk-padding">
+<main class="uk-width-expand uk-padding uk-margin-large-top">
+<div>
 	<div class="uk-flex uk-flex-middle uk-flex-between">
 		<h1>Tickets</h1>
 		<button class="uk-button uk-button-primary uk-flex uk-flex-middle" uk-toggle="target: #modal-add-ticket">Ajouter un ticket <img src="../public/img/add.svg" alt="ajouter"></button>
@@ -28,11 +29,11 @@ ob_start();
    $lastResolus = array_slice($ticketsResolus, 0, 5);
    ?>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-				<div class="uk-flex uk-flex-between uk-flex-middle">
+				<div class="uk-flex uk-flex-between uk-flex-middle apk-hr">
 					<h3 class="uk-card-title uk-margin-remove">DERNIER TICKET RESOLU</h3>
 					<span class="resolu"><?= $nbResolus ?>/15</span>
 				</div>
-				<ul class="uk-list uk-list-divider uk-margin-small-top">
+				<ul class="uk-list uk-list-divider uk-margin-top">
 					<?php if (empty($lastResolus)): ?>
 						<li>Aucun ticket résolu</li>
 					<?php else: ?>
@@ -59,11 +60,11 @@ ob_start();
    	return $b->getIdTicket() <=> $a->getIdTicket();
    });
    // Les 4 derniers tickets haute priorité
-   $lastHaute = array_slice($ticketsHaute, 0, 5);
+   $lastHaute = array_slice($ticketsHaute, 0, 6);
    ?>
 			<div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-				<h3 class="uk-card-title">TICKETS PRIORITAIRE</h3>
-				<ul class="uk-list uk-list-divider uk-margin-small-top">
+				<h3 class="uk-card-title uk-margin-remove apk-hr">TICKETS PRIORITAIRE</h3>
+				<ul class="uk-list uk-list-divider uk-margin-top">
 					<?php if (empty($lastHaute)): ?>
 						<li>Aucun ticket haute priorité</li>
 					<?php else: ?>
@@ -97,8 +98,8 @@ ob_start();
     // Couleurs pour chaque status (ajuste selon tes besoins)
     $statusColors = ["#1e87f0", "#32d296", "#faa05a", "#f0506e", "#222", "#999"];
     ?>
-		        <h3 class="uk-card-title uk-margin-remove">VUE D'ENSEMBLE</h3>
-		        <canvas id="statusChart" width="250" height="50" style="display:block;margin:-40px auto;"></canvas>
+		        <h3 class="uk-card-title uk-margin-remove apk-hr">VUE D'ENSEMBLE</h3>
+		        <canvas id="statusChart" width="250" height="50"></canvas>
 		        <div id="statusLegend"></div>
 			</div>
 		</div>
@@ -119,7 +120,7 @@ ob_start();
 	</form>
 
 	<div class="uk-overflow-auto">
-	    <table class="uk-table uk-table-small uk-table-divider" style="max-height:1120px;">
+	    <table class="uk-table uk-table-small uk-table-divider uk-table-striped" style="max-height:1120px;">
 	        <thead>
 	            <tr>
 	                <th>Ticket</th>
@@ -144,7 +145,7 @@ ob_start();
 						<td><?= $ticket->getTicketNumber() ?></td>
 						<td><?= $ticket->getClientName() ?></td>
 						<td><?= $ticket->getDeviceName() ?></td>
-						<td><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
+						<td class="uk-text-nowrap"><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
 						<td><?= $ticket->getPriorityName() ?></td>
 						<td><?php
       $createdById = $ticket->getCreatedBy();
@@ -175,7 +176,7 @@ ob_start();
 	<?php if ($_SESSION["user_role"] === 1 || $_SESSION["user_role"] === 2): ?>
 	<h2>Ticket en attente</h2>
 	<div class="uk-overflow-auto">
-	    <table class="uk-table uk-table-small uk-table-divider" style="max-height:1120px;">
+	    <table class="uk-table uk-table-small uk-table-divider uk-table-striped" style="max-height:1120px;">
 	        <thead>
 	            <tr>
 	                <th>Ticket</th>
@@ -203,7 +204,7 @@ ob_start();
 						<td><?= $ticket->getTicketNumber() ?></td>
 						<td><?= $ticket->getClientName() ?></td>
 						<td><?= $ticket->getDeviceName() ?></td>
-						<td><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
+						<td class="uk-text-nowrap"><span class="badge <?= strtolower(str_replace(" ", "-", $ticket->getStatusName())) ?>"><?= $ticket->getStatusName() ?></span></td>
 						<td><?= $ticket->getPriorityName() ?></td>
 						<td><?php
       $createdById = $ticket->getCreatedBy();
@@ -233,6 +234,7 @@ ob_start();
 	</div>
 	<?php endif; ?>
 </div>
+</main>
 
 <?php
 $mainContent = ob_get_clean();

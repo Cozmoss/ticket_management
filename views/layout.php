@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/uikit.min.css" />
+    <link rel="stylesheet" href="../public/css/uikit/uikit.min.css" />
     <script src="../public/js/uikit.min.js"></script>
     <script src="../public/js/uikit-icons.min.js"></script>
     <?php if (isset($statusLabels, $statusValues, $statusColors)): ?>
@@ -17,6 +17,7 @@
     <?php endif; ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../public/js/chart.js"></script>
+    <link rel="stylesheet" href="../public/css/uikit_overwrite.css">
     <link rel="stylesheet" href="../public/css/app.css">
     <title>TicketsFlow</title>
 </head>
@@ -28,7 +29,7 @@
     			<?php include "navbar.php"; ?>
 			</div>
 			<!--Menu mobile-->
-			<div class="uk-padding-small uk-hidden@m uk-position-fixed">
+			<div class="uk-padding-small uk-hidden@m uk-position-fixed uk-width-expand apk-nav-mobile" style="z-index: 9;">
 				<button class="apk-btn-mobile uk-margin-small-right" uk-toggle="target: #offcanvas-nav-primary">
 					<svg width="30" height="30" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class=" uk-svg" data-svg="/static/img/pictos/menu-burger.svg">
 						<rect x="4" y="4" width="16" height="2"></rect>

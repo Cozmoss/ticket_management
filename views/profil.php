@@ -4,7 +4,8 @@ ob_start();
 ?>
 
 <!-- Main Content -->
-<div class="uk-width-expand uk-padding">
+<main class="uk-width-expand uk-padding uk-margin-large-top">
+<div>
 	<div class="uk-flex uk-flex-middle uk-flex-between">
 		<h1>Profil</h1>
 	</div>
@@ -50,9 +51,11 @@ ob_start();
     </form>
 
 </div>
+</main>
 
 <?php
 $mainContent = ob_get_clean();
 include "layout.php";
+
 
 ?>
