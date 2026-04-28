@@ -2,7 +2,7 @@
 
 class MonPDO
 {
-	private const HOST_NAME = "ticketsflow.servange.fr";
+	private const HOST_NAME = "databasehelix5320";
 
 	private const DB_NAME = "helix5320";
 
