@@ -2,13 +2,13 @@
 
 class MonPDO
 {
-	private const HOST_NAME = "localhost";
+	private const HOST_NAME = "ticketsflow.servange.fr";
 
-	private const DB_NAME = "ticket_management";
+	private const DB_NAME = "helix5320";
 
-	private const USER_NAME = "root";
+	private const USER_NAME = "helix5320";
 
-	private const PDW = "root";
+	private const PDW = "MdY3bBpL0jApvTPe";
 
 	private static $monPDOinstance = null;
 
